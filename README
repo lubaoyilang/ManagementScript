@@ -45,8 +45,8 @@ Factory.Moe的服务器维护管理脚本，适用于 CentOS 7 系统。
 	以及缺少一些模块、扩展功能。
 	会使用 yum 来解决依赖问题。
 
-# backup-web.sh
-	备份网站所在文件夹，使用tar压缩并打包
+# backup-web.sh(开发中)
+	备份网站所在文件夹，使用tar压缩并打包。
 		html		默认地址：/etc/www/html
 	备份数据库内容,需要设置要备份的数据库名、MySQL的用户名及密码
 		backup		备份文件位置
@@ -54,6 +54,6 @@ Factory.Moe的服务器维护管理脚本，适用于 CentOS 7 系统。
 		sql_user	MySQL用户名，默认用户名：root
 		sql_passwd	MySQL密码
 
-# backup-everyday.sh
-	每天固定时间备份网站文件及数据库，备份的数据将被储存7天，7天后删除
+# backup-everyday.sh(开发中)
+	每天固定时间备份网站文件及数据库，备份的数据将被储存7天，7天后删除。
 		time		每天备份程序的时间（时区以主机时区为准）
