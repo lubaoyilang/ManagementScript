@@ -36,6 +36,8 @@ cd $php
 	--with-xsl \
 	--with-zlib \
 	--enable-fpm \
+	--with-fpm-user=php-fpm \
+	--with-fpm-group=php-fpm \
 	--enable-bcmath \
 	--enable-libxml \
 	--enable-inline-optimization \
@@ -60,6 +62,18 @@ cd $php
 # 安装
 make
 make install
+
+cp php.ini-production /usr/local/php7/lib/php.ini
+cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
+cp /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf
+
+# 添加到系统服务
+cp sapi/fpm/init.d.php-fpm /etc/rc.d/init.d/php-fpm
+sed -i '1a # chkconfig: 35 71 71' /etc/rc.d/init.d/php-fpm
+sed -i '1a # description: php-fpm' /etc/rc.d/init.d/php-fpm
+chmod a+x /etc/init.d/php-fpm
+systemctl start php-fpm
+systemctl enable php-fpm
 
 # 快捷方式
 ln -s /usr/local/php7/bin/* /usr/bin/
