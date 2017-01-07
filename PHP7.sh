@@ -7,7 +7,7 @@
 # 作者:  Selphia (sp), admin@factory.moe
 
 # 变量
-yum -y install libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel pcre-devel curl-devel libxslt-devel ImageMagick
+yum -y install libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel pcre-devel curl-devel libxslt-devel ImageMagick icu libicu libicu-devel
 
 php='php-7.1.0'
 php_download=\
@@ -52,12 +52,13 @@ cd $php
 	--enable-sysvsem \
 	--enable-xml \
 	--enable-zip \
-	--enable-apcu-bc \
 	--with-mysqli \
 	--with-pdo-mysql \
 	--with-pdo-sqlite \
 	--with-pgsql \
-	--with-pdo-pgsql
+	--with-pdo-pgsql \
+	--enable-intl \
+	--with-icu-dir=/usr
 
 # 安装
 make
@@ -67,11 +68,16 @@ cp php.ini-production /usr/local/php7/lib/php.ini
 cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
 cp /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf
 
+# 创建 php-fpm 用户
+groupadd -r php-fpm
+useradd php-fpm -g php-fpm -r -M -s /sbin/nologin
+
 # 添加到系统服务
 cp sapi/fpm/init.d.php-fpm /etc/rc.d/init.d/php-fpm
 sed -i '1a # chkconfig: 35 71 71' /etc/rc.d/init.d/php-fpm
-sed -i '1a # description: php-fpm' /etc/rc.d/init.d/php-fpm
+sed -i '2a # description: php-fpm' /etc/rc.d/init.d/php-fpm
 chmod a+x /etc/init.d/php-fpm
+chkconfig --add php-fpm
 systemctl start php-fpm
 systemctl enable php-fpm
 
@@ -79,6 +85,17 @@ systemctl enable php-fpm
 ln -s /usr/local/php7/bin/* /usr/bin/
 build/shtool install -c ext/phar/phar.phar /usr/local/php7/bin
 ln -s -f phar.phar /usr/local/php7/bin/phar
+
+# 添加 Apache2 的支持
+sed -i 's/index.html/index.html index.php/g' /usr/local/apache/conf/httpd.conf
+echo '# PHP7 Setting' >> /usr/local/apache/conf/httpd.conf
+echo 'AddType application/x-httpd-php .php' >> /usr/local/apache/conf/httpd.conf
+echo 'AddType application/x-httpd-php-source .phps' >> /usr/local/apache/conf/httpd.conf
+systemctl restart httpd.service
+
+# 删除安装文件
+rm -rf $php
+rm -rf $php.tar.xz
 
 # 退出
 exit 0

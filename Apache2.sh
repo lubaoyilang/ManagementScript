@@ -48,7 +48,7 @@ sed -i 's/Group daemon/Group apache/g' /usr/local/apache/conf/httpd.conf
 apachectl -k stop
 cp /usr/local/apache/bin/apachectl  /etc/rc.d/init.d/httpd
 sed -i '1a # chkconfig: 35 70 70' /etc/rc.d/init.d/httpd
-sed -i '1a # description: Apache' /etc/rc.d/init.d/httpd
+sed -i '2a # description: Apache' /etc/rc.d/init.d/httpd
 chkconfig --add httpd
 
 # 启动服务

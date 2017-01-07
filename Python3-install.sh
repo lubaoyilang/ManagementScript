@@ -23,7 +23,7 @@ yum install gcc zlib zlib-devel openssl openssl-devel sqlite-devel bzip2-devel e
 
 # 下载、解压、编译、安装Python
 wget $python_down
-tar -xvf $python\.tar.xz
+tar -xvf $python.tar.xz
 cd ./$python
 ./configure --prefix=/usr/bin/Python3
 make all
@@ -36,6 +36,12 @@ ln -s /usr/bin/Python3/bin/* /usr/bin
 pip3 install --upgrade pip
 pip3 install wheel
 
+# 删除安装文件
+rm -rf $python
+rm -rf $python.tar.xz
+
 # 结束
 python3 -V
+
+# 退出
 exit 0
