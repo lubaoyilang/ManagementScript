@@ -15,7 +15,7 @@ Factory.Moe的服务器维护管理脚本，适用于 CentOS 7 系统。
     |-密码
     |-加密方式 (选择 aes-256-cfb 或 chacha20 ，推荐使用 chacha20)
 
-# Django-install.sh
+# Django-install.sh	(功能暂未完成)
 	使用 Python3 安装 Django 框架。
 
 # BasicSet.sh
@@ -38,14 +38,15 @@ Factory.Moe的服务器维护管理脚本，适用于 CentOS 7 系统。
 	安装方便，使用稳定。但是版本太低。
 	不过能用就行啊……
 
-# LAMP-install-compile.sh
-	使用编译的方法安装 Apache2 MariaDB 及 PHP7 
-	安装版本更高，支持更多新的特性。
+# rely.sh
+	使用 yum 来解决 Apache2 Nginx 安装时缺少依赖的问题。
+
+# Apache2.sh	Nginx.sh	PHP7.sh
+	使用编译的方法安装,版本更高，支持更多新的特性。
 	但是可能会产生各种不可预料的问题。
 	以及缺少一些模块、扩展功能。
-	会使用 yum 来解决依赖问题。
 
-# backup-web.sh(开发中)
+# backup-web.sh
 	备份网站所在文件夹，使用tar压缩并打包。
 		html		默认地址：/etc/www/html
 	备份数据库内容,需要设置要备份的数据库名、MySQL的用户名及密码
@@ -56,4 +57,4 @@ Factory.Moe的服务器维护管理脚本，适用于 CentOS 7 系统。
 
 # backup-everyday.sh(开发中)
 	每天固定时间备份网站文件及数据库，备份的数据将被储存7天，7天后删除。
-		time		每天备份程序的时间（时区以主机时区为准）
+		time		每天备份程序的时间（时区以主机时区为准

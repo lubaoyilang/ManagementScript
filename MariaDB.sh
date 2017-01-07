@@ -23,5 +23,19 @@ systemctl start mariadb.service
 # 设置开机启动 MariaDB
 systemctl enable mariadb.service
 
+# 设置MariaDB密码
+echo "接下来将执行MySQL安全配置向导"
+echo "- 输入当前的root密码 (按Enter跳过)"
+echo "- 设置root密码"
+echo "- 删除匿名帐号"
+echo "- 禁止root用户远程登录"
+echo "- 删除测试数据库并禁止访问"
+echo "- 重新加载权限表"
+read -s -n1 -p "按任意键继续 ... "
+mysql_secure_installation
+
+# 重启 httpd MariaDB
+systemctl restart mariadb.service
+
 # 退出
 exit 0

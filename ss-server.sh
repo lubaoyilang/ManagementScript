@@ -6,13 +6,6 @@
 # 修订:  None
 # 作者:  Selphia (sp), admin@factory.moe
 
-### 检测用户是否为Root
-if [ $UID != "0" ]
-then
-	echo "请使用root帐户来执行此程序"
-	exit 0
-fi
-
 ### 检测是否安装GCC
 gcc --version
 

@@ -7,16 +7,8 @@
 # 作者:  Selphia (sp), admin@factory.moe
 
 # 变量
-user=`whoami`
 python="Python-3.5.2"
 python_down='https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz'
-
-### 检测用户是否为Root
-if [ $UID != "0" ]
-then
-	echo "请使用root帐户来执行此程序"
-	exit 0
-fi
 
 # 解决依赖
 yum install gcc zlib zlib-devel openssl openssl-devel sqlite-devel bzip2-devel expat-devel gdbm-devel readline-devel -y

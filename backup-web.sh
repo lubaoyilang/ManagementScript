@@ -10,9 +10,15 @@
 #环境变量
 html="/var/www/html"	# HTML文件夹
 backup=""				# 备份文件目录
-sql_name=""				# 备份内数据库名称
-sql_user="root"			# Mysql用户名
-sql_passwd=""			# Mysql密码
+# MariaDB & MySQL
+mysql_name=""			# 备份内数据库名称
+mysql_user="root"		# Mysql用户名
+mysql_passwd=""			# Mysql密码
+# postgreSQL
+psql_name=""			# 备份内数据库名称
+psql_user="postgres"		# Mysql用户名
+psql_passwd=""			# Mysql密码
+# (请注释掉不使用的数据库)
 
 #建立备份目录
 test -d $backup
@@ -29,11 +35,13 @@ time="$(date +%Y%m%d)"
 tar -Jpcf html_"$time".tar.xz $html
 
 # 备份数据库
-mysqldump -u"$sql_user" -p"$sql_passwd" $sql_name > "$sql_name"_"$time".sql
+mysqldump -u"$sql_user" -p"$sql_passwd" $sql_name > "$sql_name"_"$time".MariaDB
+pg_dump -U "$sql_user" -W "$sql_passwd" $sql_name > "$sql_name"_"$time".postgreSQL
 
 #重新启动系统服务
 systemctl restart httpd.service
 systemctl restart mariadb.service
+systemctl restart postgresql.service
 
 #退出
 exit 0
