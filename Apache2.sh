@@ -26,7 +26,6 @@ cd ./$apache
 	--enable-deflate \
 	--enable-expires \
 	--enable-headers \
-	--enable-session \
 	--with-zlib \
 	--with-pcre \
 	--enable-modules=all \
