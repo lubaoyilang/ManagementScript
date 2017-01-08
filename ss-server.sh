@@ -26,7 +26,7 @@ then
 fi
 
 ### 设置变量
-LATEST='libsodium-1.0.11'
+LATEST='libsodium-*'
 
 echo 'Server IP address'
 read server_ip
@@ -83,6 +83,10 @@ make install
 echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 ldconfig
 
+cd ..
+rm -rf LATEST.tar.gz
+rm -rf $LATEST
+
 # 使用aes-256-cfb加密协议
 yum install m2crypto -y
 
@@ -97,4 +101,5 @@ chmod a+x /etc/rc.d/rc.local
 # 程序结束
 ssserver -c /etc/shadowsocks/config.json -d start
 echo 'If the installation was successful,ShadowSocks should now be running on your system.'
+
 exit 0

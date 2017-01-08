@@ -37,5 +37,9 @@ mysql_secure_installation
 # 重启 httpd MariaDB
 systemctl restart mariadb.service
 
+# 显示版本信息
+systemctl status mariadb.service
+mysql -V
+
 # 退出
 exit 0

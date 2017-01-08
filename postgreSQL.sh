@@ -17,6 +17,7 @@ systemctl start  postgresql.service
 systemctl enable  postgresql.service
 
 # 显示 postgreSQL 版本
+systemctl status postgresql.service
 psql -V
 
 # 退出

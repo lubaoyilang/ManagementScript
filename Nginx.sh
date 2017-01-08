@@ -69,9 +69,8 @@ chown -R nginx:nginx /etc/nginx
 mkdir -p /var/cache/nginx/client_temp
 /usr/sbin/nginx -c /etc/nginx/nginx.conf
 
-# 删除安装文件
-rm -rf $nginx.tar.gz
-rm -rf $nginx
+# 显示版本
+nginx -v
 
 # 退出
 exit 0

@@ -7,8 +7,18 @@
 # 作者:  Selphia (sp), admin@factory.moe
 
 # 变量
-python="Python-3.5.2"
-python_down='https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz'
+python="Python-3.6.0"
+python_down=\
+"https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz"
+
+### 检测是否安装GCC
+gcc --version
+
+if [ $? != 0 ]
+then
+	echo 'Before you proceed, make sure that your system has a C compiler'
+	exit 0
+fi
 
 # 解决依赖
 yum install gcc zlib zlib-devel openssl openssl-devel sqlite-devel bzip2-devel expat-devel gdbm-devel readline-devel -y

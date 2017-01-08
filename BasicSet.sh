@@ -99,14 +99,4 @@ sed -i 's/SELINUXTYPE=targeted/#SELINUXTYPE=targeted/g' /etc/selinux/config
 echo 'SELINUX=disabled' >> /etc/selinux/config
 setenforce 0
 
-### 重启系统
-echo -e "\033[1;31m程序执行成功，需要重启您的电脑吗？\033[0m y/n"
-read -s -n1 re
-if [ $re == 'y' ]
-then
-	shutdown -r now
-else
-	echo "程序结束，不会重启您的电脑。"
-fi
-
 exit 0

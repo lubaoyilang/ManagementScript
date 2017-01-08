@@ -23,9 +23,14 @@ cd ./$apache
 	--enable-cgi \
 	--enable-ssl \
 	--enable-rewrite \
+	--enable-deflate \
+	--enable-expires \
+	--enable-headers \
+	--enable-session \
 	--with-zlib \
 	--with-pcre \
-	--enable-modules=all
+	--enable-modules=all \
+	--enable-mpms-shared=all
 
 # 安装
 make all
@@ -51,6 +56,10 @@ sed -i '1a # chkconfig: 35 70 70' /etc/rc.d/init.d/httpd
 sed -i '2a # description: Apache' /etc/rc.d/init.d/httpd
 chkconfig --add httpd
 
+# 创建/var/www/html
+mkdir /var/www/
+ln -s /usr/local/apache/htdocs /var/www/html
+
 # 启动服务
 systemctl start httpd.service
 
@@ -60,11 +69,6 @@ systemctl enable httpd.service
 # 显示版本信息
 systemctl status httpd.service
 httpd -v
-
-# 清理安装包
-cd ..
-rm -rf $apache
-rm -rf $apache.tar.bz2
 
 # 退出
 exit 0

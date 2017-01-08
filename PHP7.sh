@@ -93,9 +93,5 @@ echo 'AddType application/x-httpd-php .php' >> /usr/local/apache/conf/httpd.conf
 echo 'AddType application/x-httpd-php-source .phps' >> /usr/local/apache/conf/httpd.conf
 systemctl restart httpd.service
 
-# 删除安装文件
-rm -rf $php
-rm -rf $php.tar.xz
-
 # 退出
 exit 0
