@@ -38,10 +38,6 @@ ln -s /usr/bin/Python3/bin/* /usr/bin
 pip3 install --upgrade pip
 pip3 install wheel
 
-# 删除安装文件
-rm -rf $python
-rm -rf $python.tar.xz
-
 # 结束
 python3 -V
 
