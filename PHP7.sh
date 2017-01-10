@@ -91,6 +91,11 @@ sed -i 's/index.html/index.html index.php/g' /usr/local/apache/conf/httpd.conf
 echo '# PHP7 Setting' >> /usr/local/apache/conf/httpd.conf
 echo 'AddType application/x-httpd-php .php' >> /usr/local/apache/conf/httpd.conf
 echo 'AddType application/x-httpd-php-source .phps' >> /usr/local/apache/conf/httpd.conf
+
+# 安装apcu
+pecl install apcu
+echo "extension=apcu.so" >> /usr/local/php7/lib/php.ini
+systemctl restart php-fpm.service
 systemctl restart httpd.service
 
 # 退出
