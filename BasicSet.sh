@@ -99,4 +99,8 @@ sed -i 's/SELINUXTYPE=targeted/#SELINUXTYPE=targeted/g' /etc/selinux/config
 echo 'SELINUX=disabled' >> /etc/selinux/config
 setenforce 0
 
+# 重启网络服务
+systemctl restart network
+
+# 退出
 exit 0
