@@ -41,9 +41,11 @@ echo "请输入SSH端口号："
 read port
 
 ### 更新软件
-yum update -y
-yum upgrade -y
-yum install vim -y
+yum -y update
+yum -y upgrade
+yum -y install vim 
+yum -y install tar
+yum -y install bzip2
 
 ### 更改主机名
 if test -n "$hostname"
